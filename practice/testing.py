@@ -18,3 +18,12 @@ print('=======')
 
 array = array[1:]
 print(array)
+
+sub = [5, 0, 9]
+
+print(np.append(array, [sub], axis=0))
+
+x = None
+x = 5
+
+print(None == x)
