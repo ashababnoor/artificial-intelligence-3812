@@ -123,7 +123,10 @@ epoch = list(range(myrange))
 plt.plot(epoch, train_loss)
 plt.xlabel("Epoch")
 plt.ylabel("Train loss")
-# plt.show()
+plt.title('Logistic Regression')
+plt.savefig('logistic_regression/graph.png')
+
+plt.show()
 
 # validation code
 
