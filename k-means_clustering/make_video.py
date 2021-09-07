@@ -18,6 +18,9 @@ def convert_pictures_to_video(pathIn, pathOut, fps, time):
         height, width, layers = img.shape
         size = (width, height)
 
+        if i == len(files) - 1:
+            time *= 5
+
         for k in range(time):
             frame_array.append(img)
 
