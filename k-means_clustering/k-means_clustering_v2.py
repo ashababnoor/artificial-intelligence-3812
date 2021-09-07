@@ -5,7 +5,8 @@ from numpy.lib.function_base import append
 
 datapath = 'k-means_clustering/datasets/'
 mydata = genfromtxt((datapath+'data.csv'), delimiter=',')
-mycenters = genfromtxt((datapath+'centers.csv'), delimiter=',')
+# taking centers from main dataset
+mycenters = mydata[:6]
 
 
 # # plotting the initial data position
@@ -14,9 +15,9 @@ mycenters = genfromtxt((datapath+'centers.csv'), delimiter=',')
 # plt.scatter(x, y, s=10, c='blue')
 
 # # plotting the initial centers
-x = [center[0] for center in mycenters]
-y = [center[1] for center in mycenters]
-plt.scatter(x, y, s=20, c='black', edgecolors='black', linewidth=1)
+# x = [center[0] for center in mycenters]
+# y = [center[1] for center in mycenters]
+# plt.scatter(x, y, s=20, c='black', edgecolors='black', linewidth=1)
 
 
 clusters = []
@@ -77,7 +78,7 @@ while True:
     clusters = temp_clusters
 
 # for plotting different points
-colors = ['#007bff', '#6f42c1', '#dc3545', '#ffc107', '#fd7e14', '#28a745']
+colors = ['#007bff', '#6f42c1', '#dc3545', '#fd7e14', '#ffc107', '#28a745']
 
 # plotting the data points
 for ind, cluster in enumerate(clusters):
@@ -95,6 +96,6 @@ plt.legend()
 
 plt.title('K-means Clustering')
 
-# plt.savefig('k-means_clustering/plot.png')
+plt.savefig('k-means_clustering/plot-proper-clusters.png')
 plt.show()
 
