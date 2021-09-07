@@ -20,6 +20,9 @@ mycenters = mydata[:6]
 # plt.scatter(x, y, s=20, c='black', edgecolors='black', linewidth=1)
 
 
+# for plotting different points
+colors = ['#007bff', '#6f42c1', '#dc3545', '#fd7e14', '#ffc107', '#28a745']
+
 clusters = []
 for i in range(len(mycenters)):
     clusters.append([])
@@ -27,8 +30,26 @@ for i in range(len(mycenters)):
 centers = mycenters.copy()
 # print('original centers: \n', centers)
 
+def plot_points(clusters, centers, iteration):
+    plt.cla()
+    # plotting the data points
+    for ind, cluster in enumerate(clusters):
+        x = [mydata[i][0] for i in cluster]
+        y = [mydata[i][1] for i in cluster]
+        label_text = 'Cluster '+str(ind+1)
+        plt.scatter(x, y, s=20, c=colors[ind], alpha=0.7, label = label_text)
 
-iteration = 0
+    # plotting the centers
+    x = [center[0] for center in centers]
+    y = [center[1] for center in centers]
+    plt.scatter(x, y, s=150, c='black', edgecolors='black', alpha=0.7, linewidth=1, marker='*', label='Centers')
+
+    plt.legend(loc='upper center') 
+    plt.title('K-means Clustering - Iteration ' + str(iteration - 100))
+    fig_name = 'k-means_clustering/cluster_images/plot_' + str(iteration) + '.png'
+    plt.savefig(fig_name)
+
+iteration = 100
 
 while True:
     temp_clusters = []
@@ -46,15 +67,10 @@ while True:
         
         temp_clusters[index].append(data)
     
-    # sub_iter = 1
     for cluster in temp_clusters:
         array = np.mean(np.array([mydata[ind] for ind in cluster]), axis=0)
         centers = centers[1:]
         centers = np.append(centers, [array], axis=0)
-        # print('\n After iter', sub_iter)
-        # print(centers)
-        # print('new is:', array)
-        # sub_iter += 1
 
     iteration += 1    
     if iteration > 1:
@@ -71,14 +87,19 @@ while True:
             if temp_ind != cluster_ind:
                 shift += 1
 
-        if shift < 10:
+        if shift < 1:
             clusters = temp_clusters
+            plot_points(clusters, centers, iteration)
             break
 
     clusters = temp_clusters
 
-# for plotting different points
-colors = ['#007bff', '#6f42c1', '#dc3545', '#fd7e14', '#ffc107', '#28a745']
+    # saving each plot in separate folder
+    plot_points(clusters, centers, iteration)
+
+
+#final plot
+plt.cla()
 
 # plotting the data points
 for ind, cluster in enumerate(clusters):
@@ -90,12 +111,14 @@ for ind, cluster in enumerate(clusters):
 # plotting the centers
 x = [center[0] for center in centers]
 y = [center[1] for center in centers]
-
 plt.scatter(x, y, s=150, c='black', edgecolors='black', alpha=0.7, linewidth=1, marker='*', label='Centers')
-plt.legend()
 
+plt.legend(loc='upper center')
 plt.title('K-means Clustering')
 
-plt.savefig('k-means_clustering/plot-proper-clusters.png')
-plt.show()
+# plt.savefig('k-means_clustering/plot-proper-clusters.png')
+
+print('Number of iterations needed:', iteration)
+
+# plt.show()
 

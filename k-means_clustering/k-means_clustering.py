@@ -96,5 +96,8 @@ plt.legend()
 plt.title('K-means Clustering')
 
 # plt.savefig('k-means_clustering/plot.png')
+
+print('Number of iterations needed:', iteration)
+
 plt.show()
 
