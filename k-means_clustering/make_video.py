@@ -32,8 +32,8 @@ def convert_pictures_to_video(pathIn, pathOut, fps, time):
 
 # creating the video
 
-directory = 'k-means_clustering/'
-pathIn = directory + 'cluster_images/'
+directory = 'k-means_clustering/cluster_images/'
+pathIn = directory + 'version-01/'
 pathOut = directory + 'video/cluster_transformation.mp4'
 fps = 24
 time = 12

@@ -94,6 +94,7 @@ plt.scatter(x, y, s=150, c='black', edgecolors='black', alpha=0.7, linewidth=1, 
 plt.legend()
 
 plt.title('K-means Clustering')
+plt.suptitle('Hello')
 
 # plt.savefig('k-means_clustering/plot.png')
 

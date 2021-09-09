@@ -28,9 +28,8 @@ for i in range(len(mycenters)):
     clusters.append([])
 
 centers = mycenters.copy()
-# print('original centers: \n', centers)
 
-def plot_points(clusters, centers, iteration):
+def plot_points(clusters, centers, iteration, colors=colors):
     plt.cla()
     # plotting the data points
     for ind, cluster in enumerate(clusters):
@@ -42,11 +41,11 @@ def plot_points(clusters, centers, iteration):
     # plotting the centers
     x = [center[0] for center in centers]
     y = [center[1] for center in centers]
-    plt.scatter(x, y, s=150, c='black', edgecolors='black', alpha=0.7, linewidth=1, marker='*', label='Centers')
+    plt.scatter(x, y, s=150, c=colors, edgecolors='black', alpha=0.7, linewidth=1, marker='*', label='Centers')
 
     plt.legend(loc='upper center') 
     plt.title('K-means Clustering - Iteration ' + str(iteration - 100))
-    fig_name = 'k-means_clustering/cluster_images/version-01/plot_' + str(iteration) + '.png'
+    fig_name = 'k-means_clustering/cluster_images/plot_' + str(iteration) + '.png'
     plt.savefig(fig_name)
 
 iteration = 100
@@ -64,9 +63,9 @@ while True:
             if distance < min_dist:
                 min_dist = distance
                 index = center
-        
+
         temp_clusters[index].append(data)
-    
+
     for cluster in temp_clusters:
         array = np.mean(np.array([mydata[ind] for ind in cluster]), axis=0)
         centers = centers[1:]
@@ -121,4 +120,3 @@ plt.title('K-means Clustering')
 print('Number of iterations needed:', iteration)
 
 # plt.show()
-
