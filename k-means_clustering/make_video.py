@@ -2,7 +2,7 @@ import cv2
 import os
 from os.path import isfile, join
 
-def convert_pictures_to_video(pathIn, pathOut, fps, time):
+def convert_pictures_to_video(pathIn, pathOut, fps, time, extend_time=[0]):
     '''
     this function converts images to videos
     '''
@@ -18,11 +18,14 @@ def convert_pictures_to_video(pathIn, pathOut, fps, time):
         height, width, layers = img.shape
         size = (width, height)
 
-        if i == len(files) - 1:
-            time *= 5
+        extend_time.append(len(files)-1)
+        if i in extend_time:
+            for k in range(time*5):
+                frame_array.append(img)
+        else:
+            for k in range(time):
+                frame_array.append(img)
 
-        for k in range(time):
-            frame_array.append(img)
 
     out = cv2.VideoWriter(pathOut, cv2.VideoWriter_fourcc(*'mp4v'), fps, size)
     for i in range(len(frame_array)):
@@ -32,9 +35,9 @@ def convert_pictures_to_video(pathIn, pathOut, fps, time):
 
 # creating the video
 
-directory = 'k-means_clustering/cluster_images/'
-pathIn = directory + 'version-01/'
-pathOut = directory + 'video/cluster_transformation.mp4'
+directory = 'k-means_clustering/'
+pathIn = directory + 'cluster_images/version-02/'
+pathOut = directory + 'video/cluster_transformation_v2.mp4'
 fps = 24
 time = 12
 
